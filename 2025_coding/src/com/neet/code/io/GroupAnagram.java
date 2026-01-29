@@ -56,6 +56,14 @@ public class GroupAnagram {
 		// using hasMap
 
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		
+		
+		//first take each array in char array
+		//now sort the char array and take then take this to in string 
+		//now put this string data into map as key if not added and empty list as value for the first time
+		//so we know we sorted data so if act ,cat will be act and act after sorting so 
+		//if again act will come then key will be same as act but we can add other act in list as many time it comes 
+		//and in the last we will extract the values.s
 
 		for (String s : strs) {
 

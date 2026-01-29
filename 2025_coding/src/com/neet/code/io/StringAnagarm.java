@@ -17,7 +17,10 @@ public class StringAnagarm {
 		char str1[] = s.toCharArray();
 		char str2[] = t.toCharArray();
 
-		
+		//here just take these string in charr arraya
+		//declare two map now interate str1 char arry 
+		//now take each char as key and their count as value in two diff map for str1 and str2
+		//now as we know if two map returns equals then these two string has anagram.
 
 		HashMap<Character, Integer> mp1 = new HashMap<Character, Integer>();
 		HashMap<Character, Integer> mp2 = new HashMap<Character, Integer>();

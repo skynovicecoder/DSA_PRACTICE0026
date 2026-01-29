@@ -11,7 +11,9 @@ import java.util.stream.Stream;
 public class ContainsDuplicate {
 	public boolean hasDuplicate(int[] nums) {
 
-		// using set
+		// using set  : here if set has already that value it returns false so we put not sign before it will
+		//become true so we can say list has duplicate value
+		
 //		boolean hasDuplicate;
 //		Set<Integer> st = new HashSet<Integer>();
 //		hasDuplicate = Arrays.stream(nums).anyMatch(n -> !st.add(n));

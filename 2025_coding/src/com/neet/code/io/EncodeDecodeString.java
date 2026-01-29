@@ -11,15 +11,14 @@ public class EncodeDecodeString {
 		if (strs.isEmpty())
 			return "";
 
-		StringBuilder sb = new StringBuilder();
+		return strs.stream().map(m -> m.length() + "#" + m).collect(Collectors.joining(""));
 
-		String str = strs.stream().map(m -> m.length() + "#" + m).collect(Collectors.joining(""));
-		System.out.print(str);
-
-		return null;
 	}
 
 	public static List<String> decode(String s) {
+
+		if (s.isEmpty())
+			return new ArrayList<String>();
 
 		List<String> result = new ArrayList<>();
 		int i = 0;

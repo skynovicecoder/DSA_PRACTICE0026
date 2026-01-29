@@ -50,7 +50,7 @@ public class TwoSum {
 	public static void main(String args[]) {
 		TwoSum obj = new TwoSum();
 
-		int arr[] = obj.twoSumHashMap(new int[] { 2, 4, 6, 10 }, 100);
+		int arr[] = obj.twoSumHashMap(new int[] { 2, 4, 6, 10 }, 10);
 		System.out.println(Arrays.toString(arr));
 
 	}
