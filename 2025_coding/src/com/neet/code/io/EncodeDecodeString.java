@@ -6,56 +6,60 @@ import java.util.stream.Collectors;
 
 public class EncodeDecodeString {
 
-	public static String encode(List<String> strs) {
+	// Encode a list of strings into a single string
+    public static String encode(List<String> strs) {
+        if (strs == null || strs.isEmpty()) {
+            return "";
+        }
 
-		if (strs.isEmpty())
-			return "";
+        // Encode each string as "length#string" and join them
+        return strs.stream()
+                   .map(s -> s.length() + "#" + s)
+                   .collect(Collectors.joining());
+    }
 
-		return strs.stream().map(m -> m.length() + "#" + m).collect(Collectors.joining(""));
+    // Decode a single encoded string back into a list of strings
+    public static List<String> decode(String s) {
+        List<String> result = new ArrayList<>();
+        if (s == null || s.isEmpty()) {
+            return result;
+        }
 
-	}
+        int i = 0;
+        while (i < s.length()) {
+            // Step 1: Read the length prefix
+            int j = i;
+            while (s.charAt(j) != '#') {
+                j++;
+            }
+            int length = Integer.parseInt(s.substring(i, j));
 
-	public static List<String> decode(String s) {
+            // Step 2: Read the string of given length
+            j++; // skip '#'
+            String word = s.substring(j, j + length);
+            result.add(word);
 
-		if (s.isEmpty())
-			return new ArrayList<String>();
+            // Step 3: Move index to next encoded part
+            i = j + length;
+        }
 
-		List<String> result = new ArrayList<>();
-		int i = 0;
+        return result;
+    }
 
-		while (i < s.length()) {
-			// Step 1: read the number (length)
-			int j = i;
-			while (s.charAt(j) != '#') {
-				j++;
-			}
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("abc");
+        list.add("pqr");
+        list.add("love");
 
-			int length = Integer.parseInt(s.substring(i, j));
+        // Encode
+        String encoded = encode(list);
+        System.out.println("Encoded string: " + encoded);
 
-			// Step 2: read the string of given length
-			j++; // move past '#'
-			String word = s.substring(j, j + length);
-			result.add(word);
-
-			// Step 3: move index to next encoded part
-			i = j + length;
-		}
-
-		return result;
-
-	}
-
-	public static void main(String args[]) {
-
-		List<String> list = new ArrayList<>();
-
-		list.add("abc");
-		list.add("pqr");
-		list.add("love");
-
-		EncodeDecodeString.encode(list);
-		EncodeDecodeString.decode("3#abc3#pqr4#love");
-
-	}
+        // Decode
+        List<String> decoded = decode(encoded);
+        System.out.println("Decoded list: " + decoded);
+    }
 
 }
+
