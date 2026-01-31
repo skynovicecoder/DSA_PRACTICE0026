@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class LongestConjecutiveSeq {
 
+	//with sorting it will be o(nlogn) for sure, but best optimal solution can be with O(n)
 	public int longestConsecutive(int[] arr) {
 		
 
@@ -34,7 +35,7 @@ public class LongestConjecutiveSeq {
 		return Math.max(max, count);
 	}
 	
-	
+	//with sorting it will be o(nlogn) for sure, but best optimal solution can be with O(n)
     public static int longestConsecutive1(int[] nums) {
         int n = nums.length;
         if (n == 0) {
@@ -69,6 +70,37 @@ public class LongestConjecutiveSeq {
         return Math.max(longestStreak, currentStreak);
     }
 
+	//Best way using Set and logic that if number-1 doest not exist then that is elligible for starting point for sequence 
+	//and then we can check if number+1 exist or not and increase the length and count the max length, which is best apprach as time complexity O(n)
+	public int longestConsecutiveUSingSet(int[] nums) {
+	    if (nums == null || nums.length == 0)
+	        return 0;
+	
+	    Set<Integer> set = new HashSet<>();
+	    for (int n : nums) {
+	        set.add(n);
+	    }
+	
+	    int longest = 0;
+	
+	    for (int n : set) {
+	        // start of sequence
+	        if (!set.contains(n - 1)) {
+	            int currentNum = n;
+	            int count = 1;
+	
+	            while (set.contains(currentNum + 1)) {
+	                currentNum++;
+	                count++;
+	            }
+	
+	            longest = Math.max(longest, count);
+	        }
+	    }
+	
+	    return longest;
+	}
+	
 	public static void main(String args[]) {
 
 		int arr[] = {0,0,1};
@@ -78,6 +110,10 @@ public class LongestConjecutiveSeq {
 
 		System.out.print(data);
 
+		int dataResult = longCon.longestConsecutiveUSingSet(arr);
+		System.out.print(dataResult);
+
 	}
 
 }
+
