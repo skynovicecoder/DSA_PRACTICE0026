@@ -25,7 +25,7 @@ public class ContainsDuplicate {
 //		return hasDuplicate;
 
 		// using brute force
-
+		//Time Complexity: O(n2)
 		for (int i = 0; i < nums.length; i++) {
 			for (int j = i + 1; j < nums.length; j++) {
 
@@ -37,10 +37,36 @@ public class ContainsDuplicate {
 		return false;
 	}
 
+	//Time Complexity: O(n)
+	public boolean hasDuplicateUsingSet(int[] nums) {
+        Set<Integer> seen = new HashSet<>();
+        for (int num : nums) {
+            if (!seen.add(num)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+	//Slightly more memory overhead (boxing integers)
+	public boolean hasDuplicateUsingStreams(int[] nums) {
+        return Arrays.stream(nums)
+                     .boxed()
+                     .collect(Collectors.toSet())
+                     .size() != nums.length;
+    }
+
 	public static void main(String args[]) {
 		ContainsDuplicate obj = new ContainsDuplicate();
 		int arr[] = { 4, 1, 2, 3, 4 };
 		boolean b = obj.hasDuplicate(arr);
 		System.out.print(b);
+
+		boolean method1 = obj.hasDuplicateUsingSet(arr);
+		System.out.print(method1);
+
+		boolean method2 = obj.hasDuplicateUsingStreams(arr);
+		System.out.print(method2);
 	}
 }
+
